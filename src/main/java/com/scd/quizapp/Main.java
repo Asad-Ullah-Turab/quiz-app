@@ -1,10 +1,10 @@
 package com.scd.quizapp;
 
-import com.scd.quizapp.view.MainView;
+import com.scd.quizapp.controller.MainViewController;
 
 public class Main {
     public static void main(String[] args) {
-        MainView mainView = new MainView();
-        mainView.setVisible(true);
+        MainViewController mainViewController = new MainViewController();
+        mainViewController.DisplayMainScreen();
     }
 }

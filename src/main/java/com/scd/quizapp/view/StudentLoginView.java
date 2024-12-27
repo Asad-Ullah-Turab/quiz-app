@@ -11,7 +11,7 @@ public class StudentLoginView extends JFrame {
     public StudentLoginView(StudentLoginController studentLoginController, int height, int width) {
         this.studentLoginController = studentLoginController;
 
-        setTitle("Quiz App");
+        setTitle("Quiz App - Student Login");
         setSize(width, height);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -21,36 +21,47 @@ public class StudentLoginView extends JFrame {
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        JLabel nameLabel = new JLabel("Name:");
+        JLabel headingLabel = new JLabel("Student Login", SwingConstants.CENTER);
+        headingLabel.setFont(new Font("Arial", Font.BOLD, 24));
         gbc.gridx = 0;
         gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        gbc.insets = new Insets(20, 10, 20, 10);
+        panel.add(headingLabel, gbc);
+
+        gbc.insets = new Insets(10, 10, 10, 10); // Reset insets for other components
+
+        JLabel nameLabel = new JLabel("Name:");
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 1;
         panel.add(nameLabel, gbc);
 
         JTextField nameField = new JTextField(20);
         gbc.gridx = 1;
-        gbc.gridy = 0;
+        gbc.gridy = 1;
         panel.add(nameField, gbc);
 
         JLabel passwordLabel = new JLabel("Password:");
         gbc.gridx = 0;
-        gbc.gridy = 1;
+        gbc.gridy = 2;
         panel.add(passwordLabel, gbc);
 
         JPasswordField passwordField = new JPasswordField(20);
         gbc.gridx = 1;
-        gbc.gridy = 1;
+        gbc.gridy = 2;
         panel.add(passwordField, gbc);
 
         JButton loginButton = new JButton("Login");
         loginButton.setFocusable(false);
         gbc.gridx = 0;
-        gbc.gridy = 2;
+        gbc.gridy = 3;
         panel.add(loginButton, gbc);
 
         JButton exitButton = new JButton("Exit");
         exitButton.setFocusable(false);
         gbc.gridx = 1;
-        gbc.gridy = 2;
+        gbc.gridy = 3;
         panel.add(exitButton, gbc);
 
         // Add action listeners for buttons

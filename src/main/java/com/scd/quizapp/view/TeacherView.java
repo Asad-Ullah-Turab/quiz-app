@@ -4,11 +4,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import com.scd.quizapp.controller.TeacherController;
+import com.scd.quizapp.model.Quiz;
+
+import java.util.List;
 
 public class TeacherView extends JFrame {
     private TeacherController teacherController;
     private JList<String> pastQuizzesList;
     private DefaultListModel<String> listModel;
+    private List<Quiz> pastQuizzes;
 
     public TeacherView(TeacherController teacherController, int width, int height) {
         this.teacherController = teacherController;
@@ -76,13 +80,18 @@ public class TeacherView extends JFrame {
         add(panel);
     }
 
-    public void setPastQuizzes(String[] quizzes) {
+    public void setPastQuizzes(List<Quiz> quizzes) {
         // Clear the existing list of quizzes
         listModel.clear();
-        // Add each quiz from the provided array to the list model
-        for (String quiz : quizzes) {
-            listModel.addElement(quiz);
+        this.pastQuizzes = quizzes;
+        // Add each quiz title from the provided list to the list model
+        for (Quiz quiz : quizzes) {
+            listModel.addElement(quiz.getTitle());
         }
+    }
+
+    public List<Quiz> getPastQuizzes() {
+        return pastQuizzes;
     }
 
     public void addQuizSelectionListener(ActionListener listener) {
@@ -96,8 +105,8 @@ public class TeacherView extends JFrame {
         });
     }
 
-    public String getSelectedQuiz() {
-        // Return the currently selected quiz from the list
+    public String getSelectedQuizTitle() {
+        // Return the currently selected quiz title from the list
         return pastQuizzesList.getSelectedValue();
     }
 }

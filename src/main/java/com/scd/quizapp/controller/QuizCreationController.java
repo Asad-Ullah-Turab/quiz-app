@@ -1,11 +1,9 @@
 package com.scd.quizapp.controller;
 
 import com.scd.quizapp.model.Quiz;
-import com.scd.quizapp.model.Question;
 import com.scd.quizapp.view.QuizCreationView;
 
 import javax.swing.*;
-import java.util.ArrayList;
 
 public class QuizCreationController {
     private QuizCreationView quizCreationView;
@@ -16,18 +14,17 @@ public class QuizCreationController {
     }
 
     public void displayQuizCreationView() {
-        this.quizCreationView = new QuizCreationView(this);
+        quizCreationView = new QuizCreationView(this);
         quizCreationView.setVisible(true);
     }
 
-    public void saveQuiz(String quizTitle) {
-        if (quizTitle != null && !quizTitle.trim().isEmpty()) {
-            Quiz newQuiz = new Quiz(quizTitle, new ArrayList<Question>());
-            // Save the new quiz (add to the list of past quizzes for now)
-            teacherController.addQuiz(newQuiz);
+    public void saveQuiz(Quiz quiz) {
+        if (quiz.getTitle() != null && !quiz.getTitle().trim().isEmpty() && !quiz.getQuestions().isEmpty()) {
+            teacherController.addQuiz(quiz);
+            System.out.println(quiz);
             quizCreationView.dispose();
         } else {
-            JOptionPane.showMessageDialog(quizCreationView, "Quiz title cannot be empty.", "Error",
+            JOptionPane.showMessageDialog(quizCreationView, "Quiz title and questions cannot be empty.", "Error",
                     JOptionPane.ERROR_MESSAGE);
         }
     }

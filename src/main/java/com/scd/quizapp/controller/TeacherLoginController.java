@@ -1,18 +1,18 @@
 package com.scd.quizapp.controller;
 
-import com.scd.quizapp.view.StudentLoginView;
+import com.scd.quizapp.view.TeacherLoginView;
 
-public class StudentLoginController {
-    StudentLoginView studentLoginView;
+public class TeacherLoginController {
+    TeacherLoginView teacherLoginView;
     MainViewController mainViewController;
 
-    public StudentLoginController(MainViewController mainViewController) {
+    public TeacherLoginController(MainViewController mainViewController) {
         this.mainViewController = mainViewController;
     }
 
     public void displayLoginScreen() {
-        studentLoginView = new StudentLoginView(this, 400, 400);
-        studentLoginView.setVisible(true);
+        teacherLoginView = new TeacherLoginView(this, 400, 400);
+        teacherLoginView.setVisible(true);
     }
 
     public void handleLogin(String name, String password) {

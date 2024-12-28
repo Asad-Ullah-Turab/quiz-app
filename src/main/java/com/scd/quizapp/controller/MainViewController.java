@@ -5,21 +5,22 @@ import com.scd.quizapp.view.MainView;
 public class MainViewController {
     MainView mainView;
     StudentLoginController studentLoginController;
+    TeacherLoginController teacherLoginController;
 
-    public void DisplayMainScreen() {
+    public void displayMainView() {
         mainView = new MainView(this, 400, 400);
         mainView.setVisible(true);
-
-        studentLoginController = new StudentLoginController();
     }
 
     public void displayStudentLogin() {
+        studentLoginController = new StudentLoginController(this);
         studentLoginController.displayLoginScreen();
         mainView.dispose();
     }
 
     public void displayTeacherLogin() {
-        studentLoginController.displayLoginScreen();
+        teacherLoginController = new TeacherLoginController(this);
+        teacherLoginController.displayLoginScreen();
         mainView.dispose();
     }
 }

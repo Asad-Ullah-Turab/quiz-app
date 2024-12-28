@@ -2,16 +2,16 @@ package com.scd.quizapp.view;
 
 import javax.swing.*;
 import java.awt.*;
-import com.scd.quizapp.controller.StudentLoginController;
+import com.scd.quizapp.controller.TeacherLoginController;
 
-public class StudentLoginView extends JFrame {
+public class TeacherLoginView extends JFrame {
 
-    public StudentLoginController studentLoginController;
+    public TeacherLoginController teacherLoginController;
 
-    public StudentLoginView(StudentLoginController studentLoginController, int height, int width) {
-        this.studentLoginController = studentLoginController;
+    public TeacherLoginView(TeacherLoginController teacherLoginController, int height, int width) {
+        this.teacherLoginController = teacherLoginController;
 
-        setTitle("Quiz App - Student Login");
+        setTitle("Quiz App - Teacher Login");
         setSize(width, height);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -21,7 +21,7 @@ public class StudentLoginView extends JFrame {
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        JLabel headingLabel = new JLabel("Student Login", SwingConstants.CENTER);
+        JLabel headingLabel = new JLabel("Teacher Login", SwingConstants.CENTER);
         headingLabel.setFont(new Font("Arial", Font.BOLD, 24));
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -66,9 +66,9 @@ public class StudentLoginView extends JFrame {
 
         // Add action listeners for buttons
         loginButton.addActionListener(
-                e -> studentLoginController.handleLogin(nameField.getText(), new String(passwordField.getPassword())));
+                e -> teacherLoginController.handleLogin(nameField.getText(), new String(passwordField.getPassword())));
         exitButton.addActionListener(e -> {
-            studentLoginController.displayMainView();
+            teacherLoginController.displayMainView();
             dispose();
         });
 

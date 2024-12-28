@@ -10,6 +10,7 @@ import java.util.List;
 public class TeacherController {
     private TeacherView teacherView;
     private MainViewController mainViewController;
+    private QuizCreationController quizCreationController;
 
     public TeacherController(MainViewController mainViewController) {
         this.mainViewController = mainViewController;
@@ -20,11 +21,6 @@ public class TeacherController {
         teacherView.setVisible(true);
         loadPastQuizzes();
         teacherView.addQuizSelectionListener(e -> handleQuizSelection());
-    }
-
-    public void createQuiz() {
-        // Logic to create a new quiz
-        System.out.println("Creating a new quiz...");
     }
 
     public void logout() {
@@ -41,11 +37,6 @@ public class TeacherController {
         teacherView.setPastQuizzes(pastQuizzes);
     }
 
-    public void selectQuiz(Quiz quiz) {
-        // Logic to handle quiz selection
-        System.out.println("Selected quiz: " + quiz.getTitle());
-    }
-
     private void handleQuizSelection() {
         String selectedQuizTitle = teacherView.getSelectedQuizTitle();
         if (selectedQuizTitle != null) {
@@ -57,5 +48,20 @@ public class TeacherController {
                 }
             }
         }
+    }
+
+    public void selectQuiz(Quiz quiz) {
+        // Logic to handle quiz selection
+        System.out.println("Selected quiz: " + quiz.getTitle());
+    }
+
+    public void openQuizCreationView() {
+        quizCreationController = new QuizCreationController(this);
+        quizCreationController.displayQuizCreationView();
+    }
+
+    public void addQuiz(Quiz quiz) {
+        teacherView.getPastQuizzes().add(quiz);
+        teacherView.setPastQuizzes(teacherView.getPastQuizzes());
     }
 }

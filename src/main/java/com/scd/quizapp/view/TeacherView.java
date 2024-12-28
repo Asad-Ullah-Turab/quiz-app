@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import com.scd.quizapp.controller.TeacherController;
 import com.scd.quizapp.model.Quiz;
+import java.awt.event.ActionEvent;
 
 import java.util.List;
 
@@ -74,7 +75,7 @@ public class TeacherView extends JFrame {
         panel.add(logoutButton, gbc);
 
         // Add action listeners for buttons
-        createQuizButton.addActionListener(e -> this.teacherController.createQuiz());
+        createQuizButton.addActionListener(e -> this.teacherController.openQuizCreationView());
         logoutButton.addActionListener(e -> this.teacherController.logout());
 
         add(panel);

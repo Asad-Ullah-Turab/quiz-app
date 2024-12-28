@@ -92,3 +92,30 @@ This project is referenced and inspired by:
 - **Reporting**: Include detailed analytics and progress reports for teachers.
 - **Quiz Timer**: Implement a timer for quizzes.
 - **Database Expansion**: Allow multiple-choice and true/false question types.
+
+## Database Query
+
+```
+CREATE DATABASE if not exists quizapp;
+USE quizapp;
+
+CREATE TABLE quizzes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE questions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    quiz_id INT,
+    question_text TEXT,
+    correct_answer VARCHAR(255),
+    FOREIGN KEY (quiz_id) REFERENCES quizzes(id) ON DELETE RESTRICT
+);
+
+CREATE TABLE options (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    question_id INT,
+    option_text VARCHAR(255),
+    FOREIGN KEY (question_id) REFERENCES questions(id) ON DELETE CASCADE
+);
+```

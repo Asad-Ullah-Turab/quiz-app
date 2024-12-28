@@ -66,9 +66,10 @@ public class TeacherLoginView extends JFrame {
 
         // Add action listeners for buttons
         loginButton.addActionListener(
-                e -> teacherLoginController.handleLogin(nameField.getText(), new String(passwordField.getPassword())));
+                e -> this.teacherLoginController.handleLogin(nameField.getText(),
+                        new String(passwordField.getPassword())));
         exitButton.addActionListener(e -> {
-            teacherLoginController.displayMainView();
+            this.teacherLoginController.displayMainView();
             dispose();
         });
 

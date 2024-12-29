@@ -70,8 +70,8 @@ public class QuizAttemptView extends JFrame {
         gbc.gridy = 5;
         panel.add(submitButton, gbc);
 
-        nextButton.addActionListener(e -> quizAttemptController.nextQuestion());
-        submitButton.addActionListener(e -> quizAttemptController.submitQuiz());
+        nextButton.addActionListener(e -> this.quizAttemptController.nextQuestion());
+        submitButton.addActionListener(e -> this.quizAttemptController.submitQuiz());
 
         add(panel);
     }

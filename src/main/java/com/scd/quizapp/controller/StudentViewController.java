@@ -3,10 +3,8 @@ package com.scd.quizapp.controller;
 import com.scd.quizapp.view.StudentView;
 import com.scd.quizapp.model.Quiz;
 import com.scd.quizapp.database.DatabaseManager;
-import com.scd.quizapp.model.Question;
 import com.scd.quizapp.model.Student;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;

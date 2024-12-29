@@ -3,12 +3,22 @@ package com.scd.quizapp.model;
 import java.util.List;
 
 public class Quiz {
+    private int id;
     private String title;
     private List<Question> questions;
 
-    public Quiz(String title, List<Question> questions) {
+    public Quiz(int id, String title, List<Question> questions) {
+        this.id = id;
         this.title = title;
         this.questions = questions;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -38,7 +48,8 @@ public class Quiz {
     @Override
     public String toString() {
         return "Quiz{" +
-                "title='" + title + '\'' +
+                "id=" + id +
+                ", title='" + title + '\'' +
                 ", questions=" + questions +
                 '}';
     }

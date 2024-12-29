@@ -4,6 +4,7 @@ import com.scd.quizapp.view.StudentView;
 import com.scd.quizapp.model.Quiz;
 import com.scd.quizapp.database.DatabaseManager;
 import com.scd.quizapp.model.Question;
+import com.scd.quizapp.model.Student;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ public class StudentViewController {
     private StudentView studentView;
     private MainViewController mainViewController;
     private QuizAttemptController quizAttemptController;
+    private Student student;
 
     public StudentViewController(MainViewController mainViewController) {
         this.mainViewController = mainViewController;
@@ -68,5 +70,13 @@ public class StudentViewController {
             JOptionPane.showMessageDialog(studentView, "Please select a quiz to attempt.", "Error",
                     JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
 }

@@ -3,6 +3,8 @@ package com.scd.quizapp.controller;
 import com.scd.quizapp.view.QuizAttemptView;
 import com.scd.quizapp.model.Question;
 import com.scd.quizapp.model.Quiz;
+import com.scd.quizapp.database.DatabaseManager;
+import com.scd.quizapp.model.Student;
 
 import javax.swing.*;
 import java.util.List;
@@ -50,10 +52,21 @@ public class QuizAttemptController {
     }
 
     public void submitQuiz() {
-        JOptionPane.showMessageDialog(quizAttemptView, "Quiz submitted! Your score: " + score + "/" + questions.size(),
-                "Quiz Completed", JOptionPane.INFORMATION_MESSAGE);
-        quizAttemptView.dispose();
-        studentViewController.displayStudentDashboard();
+        DatabaseManager dbManager = DatabaseManager.getInstance();
+        Student student = studentViewController.getStudent(); // Ensure this method exists in StudentViewController
+        if (student != null) {
+            int studentId = student.getId();
+            dbManager.saveStudentQuizScore(studentId, quiz.getId(), score);
+
+            JOptionPane.showMessageDialog(quizAttemptView,
+                    "Quiz submitted! Your score: " + score + "/" + questions.size(),
+                    "Quiz Completed", JOptionPane.INFORMATION_MESSAGE);
+            quizAttemptView.dispose();
+            studentViewController.displayStudentDashboard();
+        } else {
+            JOptionPane.showMessageDialog(quizAttemptView, "Error retrieving student information.", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void displayCurrentQuestion() {

@@ -11,6 +11,8 @@ import java.util.ArrayList;
 
 import com.scd.quizapp.model.Quiz;
 import com.scd.quizapp.model.Question;
+import com.scd.quizapp.model.Student;
+import com.scd.quizapp.model.StudentScore;
 
 public class DatabaseManager {
     private static final String URL = "jdbc:mysql://localhost:3306/quizapp";
@@ -150,12 +152,87 @@ public class DatabaseManager {
                     }
                 }
 
-                quizzes.add(new Quiz(quizTitle, questions));
+                quizzes.add(new Quiz(quizId, quizTitle, questions)); // Update constructor call
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
         return quizzes;
+    }
+
+    public boolean validateTeacherLogin(String name, String password) {
+        String query = "SELECT * FROM teachers WHERE name = ? AND password = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, name);
+            stmt.setString(2, password);
+            try (ResultSet rs = stmt.executeQuery()) {
+                return rs.next();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean validateStudentLogin(String name, String password) {
+        String query = "SELECT * FROM students WHERE name = ? AND password = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, name);
+            stmt.setString(2, password);
+            try (ResultSet rs = stmt.executeQuery()) {
+                return rs.next();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public void saveStudentQuizScore(int studentId, int quizId, int score) {
+        String query = "INSERT INTO student_scores (student_id, quiz_id, score) VALUES (?, ?, ?)";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, studentId);
+            stmt.setInt(2, quizId);
+            stmt.setInt(3, score);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<StudentScore> getQuizScores(int quizId) {
+        List<StudentScore> scores = new ArrayList<>();
+        String query = "SELECT s.name, ss.score FROM student_scores ss JOIN students s ON ss.student_id = s.id WHERE ss.quiz_id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, quizId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    String studentName = rs.getString("name");
+                    int score = rs.getInt("score");
+                    scores.add(new StudentScore(studentName, score));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return scores;
+    }
+
+    public Student getStudentByName(String name) {
+        String query = "SELECT * FROM students WHERE name = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, name);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    int id = rs.getInt("id");
+                    String password = rs.getString("password");
+                    return new Student(id, name, password);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

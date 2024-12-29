@@ -2,6 +2,11 @@ package com.scd.quizapp.controller;
 
 import com.scd.quizapp.view.StudentLoginView;
 
+import javax.swing.JOptionPane;
+
+import com.scd.quizapp.database.DatabaseManager;
+import com.scd.quizapp.model.Student;
+
 public class StudentLoginController {
     StudentLoginView studentLoginView;
     MainViewController mainViewController;
@@ -17,10 +22,18 @@ public class StudentLoginController {
     }
 
     public void handleLogin(String name, String password) {
-        System.out.println("Logging in the app using username: " + name + " password: " + password);
-        studentViewController = new StudentViewController(mainViewController);
-        studentViewController.displayStudentDashboard();
-        studentLoginView.dispose();
+        DatabaseManager dbManager = DatabaseManager.getInstance();
+        if (dbManager.validateStudentLogin(name, password)) {
+            System.out.println("Student login successful.");
+            studentViewController = new StudentViewController(mainViewController);
+            Student student = dbManager.getStudentByName(name); // Ensure this method exists in DatabaseManager
+            studentViewController.setStudent(student);
+            studentViewController.displayStudentDashboard();
+            studentLoginView.dispose();
+        } else {
+            System.out.println("Invalid student credentials.");
+            JOptionPane.showMessageDialog(null, "Invalid login credentials.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public void displayMainView() {

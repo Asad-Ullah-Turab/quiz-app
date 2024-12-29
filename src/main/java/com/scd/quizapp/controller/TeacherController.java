@@ -2,6 +2,7 @@ package com.scd.quizapp.controller;
 
 import com.scd.quizapp.view.TeacherView;
 import com.scd.quizapp.model.Quiz;
+import com.scd.quizapp.database.DatabaseManager;
 import com.scd.quizapp.model.Question;
 
 import java.util.ArrayList;
@@ -29,12 +30,10 @@ public class TeacherController {
     }
 
     private void loadPastQuizzes() {
-        // Load past quizzes from the model (dummy data for now)
-        List<Quiz> pastQuizzes = new ArrayList<>();
-        pastQuizzes.add(new Quiz("Quiz 1 SCD", new ArrayList<Question>()));
-        pastQuizzes.add(new Quiz("Quiz 2 VP", new ArrayList<Question>()));
-        pastQuizzes.add(new Quiz("Quiz 3 JAVA", new ArrayList<Question>()));
-        teacherView.setPastQuizzes(pastQuizzes);
+        // Load past quizzes from the database
+        DatabaseManager databaseManager = DatabaseManager.getInstance();
+        List<Quiz> quizzes = databaseManager.loadQuizzesFromDatabase();
+        teacherView.setPastQuizzes(quizzes);
     }
 
     private void handleQuizSelection() {

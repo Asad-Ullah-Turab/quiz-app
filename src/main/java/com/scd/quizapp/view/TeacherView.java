@@ -59,7 +59,7 @@ public class TeacherView extends JFrame {
         JButton createQuizButton = new JButton("Create New Quiz");
         createQuizButton.setFont(new Font("Arial", Font.PLAIN, 16));
         createQuizButton.setFocusable(false);
-        gbc.gridx = 0;
+        gbc.gridx = 1;
         gbc.gridy = 3;
         gbc.gridwidth = 1;
         gbc.weightx = 0;
@@ -70,7 +70,7 @@ public class TeacherView extends JFrame {
         JButton logoutButton = new JButton("Logout");
         logoutButton.setFont(new Font("Arial", Font.PLAIN, 16));
         logoutButton.setFocusable(false);
-        gbc.gridx = 1;
+        gbc.gridx = 0;
         gbc.gridy = 3;
         panel.add(logoutButton, gbc);
 

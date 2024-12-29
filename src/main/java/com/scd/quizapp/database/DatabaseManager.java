@@ -4,8 +4,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.List;
+import java.util.ArrayList;
 
 import com.scd.quizapp.model.Quiz;
+import com.scd.quizapp.model.Question;
 
 public class DatabaseManager {
     private static final String URL = "jdbc:mysql://localhost:3306/quizapp";
@@ -105,5 +110,52 @@ public class DatabaseManager {
                 ex.printStackTrace();
             }
         }
+    }
+
+    public List<Quiz> loadQuizzesFromDatabase() {
+        List<Quiz> quizzes = new ArrayList<>();
+        String quizQuery = "SELECT * FROM quizzes";
+        String questionQuery = "SELECT * FROM questions WHERE quiz_id = ?";
+        String optionQuery = "SELECT * FROM options WHERE question_id = ?";
+
+        try (Statement quizStmt = connection.createStatement();
+                ResultSet quizRs = quizStmt.executeQuery(quizQuery)) {
+
+            while (quizRs.next()) {
+                int quizId = quizRs.getInt("id");
+                String quizTitle = quizRs.getString("title");
+
+                List<Question> questions = new ArrayList<>();
+                try (PreparedStatement questionStmt = connection.prepareStatement(questionQuery)) {
+                    questionStmt.setInt(1, quizId);
+                    try (ResultSet questionRs = questionStmt.executeQuery()) {
+                        while (questionRs.next()) {
+                            int questionId = questionRs.getInt("id");
+                            String questionText = questionRs.getString("question_text");
+                            String correctAnswer = questionRs.getString("correct_answer");
+
+                            List<String> options = new ArrayList<>();
+                            try (PreparedStatement optionStmt = connection.prepareStatement(optionQuery)) {
+                                optionStmt.setInt(1, questionId);
+                                try (ResultSet optionRs = optionStmt.executeQuery()) {
+                                    while (optionRs.next()) {
+                                        String optionText = optionRs.getString("option_text");
+                                        options.add(optionText);
+                                    }
+                                }
+                            }
+
+                            questions.add(new Question(questionText, options, correctAnswer));
+                        }
+                    }
+                }
+
+                quizzes.add(new Quiz(quizTitle, questions));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return quizzes;
     }
 }

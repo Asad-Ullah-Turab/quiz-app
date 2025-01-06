@@ -36,7 +36,7 @@ public class TeacherView extends JFrame {
         gbc.insets = new Insets(20, 10, 20, 10);
         panel.add(headingLabel, gbc);
 
-        gbc.insets = new Insets(10, 10, 10, 10); // Reset insets for other components
+        gbc.insets = new Insets(10, 10, 10, 10);
 
         JLabel pastQuizzesLabel = new JLabel("Past Quizzes:");
         pastQuizzesLabel.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -74,7 +74,6 @@ public class TeacherView extends JFrame {
         gbc.gridy = 3;
         panel.add(logoutButton, gbc);
 
-        // Add action listeners for buttons
         createQuizButton.addActionListener(e -> this.teacherController.openQuizCreationView());
         logoutButton.addActionListener(e -> this.teacherController.logout());
 
@@ -82,10 +81,8 @@ public class TeacherView extends JFrame {
     }
 
     public void setPastQuizzes(List<Quiz> quizzes) {
-        // Clear the existing list of quizzes
         listModel.clear();
         this.pastQuizzes = quizzes;
-        // Add each quiz title from the provided list to the list model
         for (Quiz quiz : quizzes) {
             listModel.addElement(quiz.getTitle());
         }
@@ -96,18 +93,14 @@ public class TeacherView extends JFrame {
     }
 
     public void addQuizSelectionListener(ActionListener listener) {
-        // Add a selection listener to the list of past quizzes
         pastQuizzesList.addListSelectionListener(e -> {
-            // Check if the value is still adjusting
             if (!e.getValueIsAdjusting()) {
-                // Trigger the provided ActionListener's actionPerformed method
                 listener.actionPerformed(null);
             }
         });
     }
 
     public String getSelectedQuizTitle() {
-        // Return the currently selected quiz title from the list
         return pastQuizzesList.getSelectedValue();
     }
 }

@@ -53,7 +53,7 @@ public class QuizAttemptController {
 
     public void submitQuiz() {
         DatabaseManager dbManager = DatabaseManager.getInstance();
-        Student student = studentViewController.getStudent(); // Ensure this method exists in StudentViewController
+        Student student = studentViewController.getStudent();
         if (student != null) {
             int studentId = student.getId();
             dbManager.saveStudentQuizScore(studentId, quiz.getId(), score);

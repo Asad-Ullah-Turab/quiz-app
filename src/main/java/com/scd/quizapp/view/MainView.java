@@ -36,7 +36,7 @@ public class MainView extends JFrame {
         gbc.insets = new Insets(10, 10, 20, 10);
         panel.add(label, gbc);
 
-        gbc.insets = new Insets(10, 10, 10, 10); // Reset insets for buttons
+        gbc.insets = new Insets(10, 10, 10, 10);
 
         JButton studentButton = new JButton("Student");
         studentButton.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -54,7 +54,6 @@ public class MainView extends JFrame {
         gbc.gridwidth = 2;
         panel.add(teacherButton, gbc);
 
-        // Add action listeners for buttons
         studentButton.addActionListener(e -> mainViewController.displayStudentLogin());
         teacherButton.addActionListener(e -> mainViewController.displayTeacherLogin());
 

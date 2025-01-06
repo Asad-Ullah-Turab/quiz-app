@@ -26,7 +26,7 @@ public class StudentLoginController {
         if (dbManager.validateStudentLogin(name, password)) {
             System.out.println("Student login successful.");
             studentViewController = new StudentViewController(mainViewController);
-            Student student = dbManager.getStudentByName(name); // Ensure this method exists in DatabaseManager
+            Student student = dbManager.getStudentByName(name);
             studentViewController.setStudent(student);
             studentViewController.displayStudentDashboard();
             studentLoginView.dispose();

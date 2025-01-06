@@ -38,7 +38,7 @@ public class QuizAttemptView extends JFrame {
         gbc.insets = new Insets(20, 10, 20, 10);
         panel.add(questionLabel, gbc);
 
-        gbc.insets = new Insets(10, 10, 10, 10); // Reset insets for other components
+        gbc.insets = new Insets(10, 10, 10, 10);
 
         optionButtons = new JRadioButton[4];
         buttonGroup = new ButtonGroup();

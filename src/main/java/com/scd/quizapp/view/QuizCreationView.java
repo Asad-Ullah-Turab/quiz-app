@@ -147,7 +147,7 @@ public class QuizCreationView extends JFrame {
 
     private void saveQuiz() {
         String quizTitle = quizTitleField.getText();
-        Quiz quiz = new Quiz(0, quizTitle, questions); // Update constructor call with id
+        Quiz quiz = new Quiz(0, quizTitle, questions);
         quizCreationController.saveQuiz(quiz);
     }
 }

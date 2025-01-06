@@ -29,7 +29,7 @@ public class StudentLoginView extends JFrame {
         gbc.insets = new Insets(20, 10, 20, 10);
         panel.add(headingLabel, gbc);
 
-        gbc.insets = new Insets(10, 10, 10, 10); // Reset insets for other components
+        gbc.insets = new Insets(10, 10, 10, 10);
 
         JLabel nameLabel = new JLabel("Name:");
         gbc.gridx = 0;
@@ -64,7 +64,6 @@ public class StudentLoginView extends JFrame {
         gbc.gridy = 3;
         panel.add(loginButton, gbc);
 
-        // Add action listeners for buttons
         loginButton.addActionListener(
                 e -> this.studentLoginController.handleLogin(nameField.getText(),
                         new String(passwordField.getPassword())));

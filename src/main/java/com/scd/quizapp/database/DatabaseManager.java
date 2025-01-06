@@ -152,7 +152,7 @@ public class DatabaseManager {
                     }
                 }
 
-                quizzes.add(new Quiz(quizId, quizTitle, questions)); // Update constructor call
+                quizzes.add(new Quiz(quizId, quizTitle, questions));
             }
         } catch (SQLException e) {
             e.printStackTrace();

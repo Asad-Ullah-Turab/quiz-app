@@ -34,7 +34,7 @@ public class StudentView extends JFrame {
         gbc.insets = new Insets(20, 10, 20, 10);
         panel.add(headingLabel, gbc);
 
-        gbc.insets = new Insets(10, 10, 10, 10); // Reset insets for other components
+        gbc.insets = new Insets(10, 10, 10, 10);
 
         JLabel availableQuizzesLabel = new JLabel("Available Quizzes:");
         availableQuizzesLabel.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -72,7 +72,6 @@ public class StudentView extends JFrame {
         gbc.gridy = 3;
         panel.add(logoutButton, gbc);
 
-        // Add action listeners for buttons
         attemptQuizButton.addActionListener(e -> this.studentViewController.attemptQuiz());
         logoutButton.addActionListener(e -> this.studentViewController.logout());
 

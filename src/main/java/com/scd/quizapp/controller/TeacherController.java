@@ -30,7 +30,6 @@ public class TeacherController {
     }
 
     private void loadPastQuizzes() {
-        // Load past quizzes from the database
         DatabaseManager databaseManager = DatabaseManager.getInstance();
         List<Quiz> quizzes = databaseManager.loadQuizzesFromDatabase();
         teacherView.setPastQuizzes(quizzes);
@@ -39,7 +38,6 @@ public class TeacherController {
     private void handleQuizSelection() {
         String selectedQuizTitle = teacherView.getSelectedQuizTitle();
         if (selectedQuizTitle != null) {
-            // Find the selected quiz by title
             for (Quiz quiz : teacherView.getPastQuizzes()) {
                 if (quiz.getTitle().equals(selectedQuizTitle)) {
                     selectQuiz(quiz);
@@ -50,7 +48,6 @@ public class TeacherController {
     }
 
     public void selectQuiz(Quiz quiz) {
-        // Logic to handle quiz selection
         System.out.println("Selected quiz: " + quiz.getTitle());
         displayQuizScores(quiz.getId());
     }
